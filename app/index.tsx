@@ -3,7 +3,7 @@ import { RootState } from '@/state/store';
 import { useSelector } from 'react-redux';
 
 export default function Index() {
-  const tasks = useSelector((state: RootState) => state.task.tasks);
+  const tasks = useSelector((state: RootState) => state);
   return (
     <View
       style={{
@@ -11,12 +11,6 @@ export default function Index() {
         justifyContent: 'center',
         alignItems: 'center',
       }}
-    >
-      {tasks.map((task) => (
-        <Text className="text-4xl " key={task.id}>
-          {task.name}
-        </Text>
-      ))}
-    </View>
+    ></View>
   );
 }
