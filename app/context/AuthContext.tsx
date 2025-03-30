@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as SecureStore from 'expo-secure-store';
 import { AppDispatch, RootState } from '@/state/store';
-import { login } from '@/state/user/userSlice';
+import { login, logout } from '@/state/user/userSlice';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 
@@ -80,14 +80,21 @@ export default function AuthProvider({
   const logoutHandler = async () => {
     try {
       setIsLoading(true);
-      // Clear stored credentials
-      await SecureStore.deleteItemAsync('username');
-      await SecureStore.deleteItemAsync('password');
 
-      // Clear user from Redux state
-      // You may want to add a logout action to your userSlice
+      const result = await dispatch(logout()).unwrap();
+      if (result) {
+        await SecureStore.deleteItemAsync('username');
+        await SecureStore.deleteItemAsync('password');
+      }
     } catch (error) {
-      console.log('Logout failed:', error);
+      if (typeof error === 'object' && error !== null && 'error' in error) {
+        Alert.alert(
+          'Logout Failed',
+          String((error as { error: unknown }).error)
+        );
+      } else {
+        Alert.alert('Logout Failed', 'An unexpected error occurred');
+      }
     } finally {
       setIsLoading(false);
     }

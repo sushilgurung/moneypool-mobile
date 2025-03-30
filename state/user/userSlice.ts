@@ -30,6 +30,20 @@ export const login = createAsyncThunk(
   }
 );
 
+export const logout = createAsyncThunk('/users/logout', async (_, thunkApi) => {
+  try {
+    // tell db that user logged out
+    const result = true;
+    return result;
+  } catch (err) {
+    // Log the error for debugging
+    return thunkApi.rejectWithValue({
+      error:
+        err instanceof Error ? err.message : 'An unexpected error occurred',
+    });
+  }
+});
+
 export const register = createAsyncThunk(
   '/users/register',
   async (
@@ -50,6 +64,7 @@ export const register = createAsyncThunk(
           last_active: new Date().toDateString(),
         };
         users.push(createdUser);
+        return true;
       }
     } catch (err) {
       return thunkApi.rejectWithValue({
@@ -89,12 +104,31 @@ const userSlice = createSlice({
           state.error = action.error.message || 'Unknown error occurred';
         }
       })
+      .addCase(logout.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(logout.fulfilled, (state, action: PayloadAction<boolean>) => {
+        if (action.payload) {
+          state.status = 'idle';
+          state.User = null;
+        }
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.status = 'failed';
+
+        if (action.payload) {
+          state.error = (action.payload as { error: string }).error;
+        } else {
+          state.error = action.error.message || 'Unknown error occurred';
+        }
+      })
       .addCase(register.pending, (state) => {
         state.status = 'loading';
         state.error = null;
       })
       .addCase(register.fulfilled, (state) => {
-        state.status = 'succeeded';
+        state.status = 'idle';
       })
       .addCase(register.rejected, (state, action) => {
         state.status = 'failed';
