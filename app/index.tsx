@@ -9,9 +9,7 @@ export default function Index() {
   const router = useRouter();
 
   useEffect(() => {
-    // Wait for authentication check to complete
     if (!isLoading) {
-      // If not authenticated, redirect to login
       if (!isAuthenticated) {
         router.replace('/LoginScreen');
       }

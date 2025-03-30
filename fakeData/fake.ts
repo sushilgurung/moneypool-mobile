@@ -6,8 +6,8 @@ export interface User {
   first_name?: string;
   last_name?: string;
   verified: boolean;
-  created_at: Date;
-  last_active: Date;
+  created_at: string;
+  last_active: string;
   session_token?: string;
   device_fingerprint?: string;
 }
@@ -21,8 +21,8 @@ export const users: User[] = [
     first_name: 'Sarah',
     last_name: 'Jenkins',
     verified: true,
-    created_at: new Date('2024-08-15T09:23:47Z'),
-    last_active: new Date('2025-03-25T16:42:19Z'),
+    created_at: '2024-08-15T09:23:47Z',
+    last_active: '2025-03-25T16:42:19Z',
     session_token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMjg0NSwiaWF0IjoxNjc5NjE0MzQ1LCJleHAiOjE2ODIyMDYzNDZ9',
     device_fingerprint:

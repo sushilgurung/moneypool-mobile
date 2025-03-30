@@ -1,15 +1,12 @@
 import { View, TextInput, Text, Pressable } from 'react-native';
 import { useState } from 'react';
-import { RootState, AppDispatch } from '@/state/store';
-import { useSelector, useDispatch } from 'react-redux';
-import { login } from '@/state/user/userSlice';
+import { useAuth } from './context/AuthContext';
 
 export default function LoginScreen() {
   const [username, setUsername] = useState<string>('mountainexplorer42');
   const [password, setPassword] = useState<string>('test');
 
-  const userState = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch<AppDispatch>();
+  const { login } = useAuth();
 
   return (
     <View className="flex-1 p-6 bg-white justify-center">
@@ -37,18 +34,10 @@ export default function LoginScreen() {
 
         <Pressable
           className="bg-blue-500 py-3 rounded-md"
-          onPress={() => dispatch(login({ username, password }))}
+          onPress={() => login(username, password)}
         >
           <Text className="text-white text-center font-semibold">Log In</Text>
         </Pressable>
-
-        {userState.User?.username && (
-          <View className="mt-4 p-3 bg-green-100 rounded-md">
-            <Text className="text-green-700 text-center">
-              Logged in as: {userState.User.username}
-            </Text>
-          </View>
-        )}
       </View>
     </View>
   );

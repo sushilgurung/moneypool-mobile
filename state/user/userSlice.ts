@@ -46,8 +46,8 @@ export const register = createAsyncThunk(
           username,
           password_hash: password,
           verified: false,
-          created_at: new Date(),
-          last_active: new Date(),
+          created_at: new Date().toDateString(),
+          last_active: new Date().toDateString(),
         };
         users.push(createdUser);
       }

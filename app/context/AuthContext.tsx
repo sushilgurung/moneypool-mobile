@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as SecureStore from 'expo-secure-store';
 import { AppDispatch, RootState } from '@/state/store';
 import { login } from '@/state/user/userSlice';
+import { Alert } from 'react-native';
+import { useRouter } from 'expo-router';
+
 type AuthContextType = {
   isLoading: boolean;
   isAuthenticated: boolean;
@@ -14,12 +17,15 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+export default function AuthProvider({
   children,
-}) => {
+}: {
+  children: React.ReactNode;
+}) {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch<AppDispatch>();
   const { User, error, status } = useSelector((state: RootState) => state.user);
+  const router = useRouter();
 
   useEffect(() => {
     // Check for saved credentials on app start
@@ -50,14 +56,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const loginHandler = async (username: string, password: string) => {
     try {
       setIsLoading(true);
-      await dispatch(login({ username, password })).unwrap();
-
-      // Save credentials securely for auto-login
-      await SecureStore.setItemAsync('username', username);
-      await SecureStore.setItemAsync('password', password);
+      const result = await dispatch(login({ username, password })).unwrap();
+      if (result.user_id) {
+        console.log('login');
+        await SecureStore.setItemAsync('username', username);
+        await SecureStore.setItemAsync('password', password);
+        router.replace('/HomeScreen');
+      }
     } catch (error) {
-      console.log('Login failed:', error);
-      throw error;
+      if (typeof error === 'object' && error !== null && 'error' in error) {
+        Alert.alert(
+          'Login Failed',
+          String((error as { error: unknown }).error)
+        );
+      } else {
+        Alert.alert('Login Failed', 'An unexpected error occurred');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -88,7 +102,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
+}
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
