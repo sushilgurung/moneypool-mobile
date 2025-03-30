@@ -49,7 +49,7 @@ export const register = createAsyncThunk(
           created_at: new Date(),
           last_active: new Date(),
         };
-        users.push();
+        users.push(createdUser);
       }
     } catch (err) {
       return thunkApi.rejectWithValue({
