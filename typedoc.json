@@ -1,0 +1,9 @@
+{
+  "entryPoints": ["app"],
+  "entryPointStrategy": "expand",
+  "out": "docs",
+  "name": "Expo App Documentation",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true
+}

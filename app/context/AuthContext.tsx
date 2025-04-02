@@ -7,7 +7,7 @@ import { login, logout } from '@/state/user/userSlice';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 
-type AuthContextType = {
+export type AuthContextType = {
   isLoading: boolean;
   isAuthenticated: boolean;
   login: (username: string, password: string) => Promise<void>;
@@ -53,6 +53,11 @@ export default function AuthProvider({
     checkAuth();
   }, []);
 
+  /**
+   * Handles user login and stores details in SecureStore
+   * @param username
+   * @param password
+   */
   const loginHandler = async (username: string, password: string) => {
     try {
       setIsLoading(true);

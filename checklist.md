@@ -3,13 +3,13 @@
 - [ ] user login slice test
 - [ ] register slice
 - [ ] register screen
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
+- [ ] splash list
+- [ ] tests
+- [ ] comments
+- [ ] jsdoc
+- [ ] email registration
+- [ ] push notification
+- [ ] websocket
 - [ ]
 - [ ]
 - [ ]

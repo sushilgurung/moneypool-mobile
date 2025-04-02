@@ -3,6 +3,16 @@ import { useState } from 'react';
 import { useAuth } from './context/AuthContext';
 import { router } from 'expo-router';
 
+/**
+ * LoginScreen component for user authentication.
+ *
+ * This component provides a user interface for logging into the application.
+ * It includes input fields for username and password, along with buttons to
+ * submit login credentials or navigate to the registration screen.
+ *
+ * @returns {JSX.Element} A form with username and password inputs and action buttons
+ */
+
 export default function LoginScreen() {
   const [username, setUsername] = useState<string>('mountainexplorer42');
   const [password, setPassword] = useState<string>('test');
