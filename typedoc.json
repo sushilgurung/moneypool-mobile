@@ -1,9 +1,6 @@
 {
-  "entryPoints": ["app"],
+  "entryPoints": ["app", "state", "fakeData"],
   "entryPointStrategy": "expand",
   "out": "docs",
-  "name": "Expo App Documentation",
-  "excludePrivate": true,
-  "excludeProtected": true,
-  "excludeExternals": true
+  "name": "Money pool Documentation"
 }

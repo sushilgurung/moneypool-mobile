@@ -10,7 +10,8 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint",
-    "docs": "typedoc "
+    "docs": "typedoc ",
+    "jsdocs": "jsdoc -c jsdoc.json"
   },
   "jest": {
     "preset": "jest-expo"

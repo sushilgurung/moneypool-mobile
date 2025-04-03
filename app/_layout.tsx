@@ -4,7 +4,16 @@ import { store } from '@/state/store';
 import '../global.css';
 import AuthProvider from './context/AuthContext';
 
-export default function RootLayout() {
+/**
+ * Layout component that has all the screens via Stack.
+ *
+ * The  Screens are wrapped in react redux store provider and authProvider
+ *
+ *
+ *
+ */
+
+export function RootLayout() {
   return (
     <Provider store={store}>
       <AuthProvider>
@@ -18,3 +27,5 @@ export default function RootLayout() {
     </Provider>
   );
 }
+
+export default RootLayout;

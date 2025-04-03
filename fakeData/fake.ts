@@ -1,3 +1,7 @@
+/**
+ *  User type
+ *
+ */
 export interface User {
   user_id: number;
   username: string;
@@ -12,6 +16,10 @@ export interface User {
   device_fingerprint?: string;
 }
 
+/**
+ *  array of users to simulate database
+ *
+ */
 export const users: User[] = [
   {
     user_id: 12845,

@@ -1,19 +1,43 @@
 import { users, User } from '@/fakeData/fake';
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
-interface UserState {
+/**
+ *  holds the state for userSlice
+ */
+export type UserState = {
   User: User | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
-}
+};
 
+/**
+ *  used to login user
+ */
+export type UserLoginDetails = {
+  username: string;
+  password: string;
+};
+
+/**
+ *  used in creation of user
+ */
+export type UserCreationDetails = {
+  username: string;
+  password: string;
+  email?: string;
+};
+
+/**
+ *  async method that logs in user by making api call
+ *
+ * @param details - User Login Details
+ */
 export const login = createAsyncThunk(
   '/users/login',
-  async (
-    { username, password }: { username: string; password: string },
-    thunkApi
-  ) => {
+  async (details: UserLoginDetails, thunkApi) => {
     try {
+      //api call
+      const { username, password } = details;
       const user = users.find((user) => user.username === username);
 
       if (user && user.password_hash === password) {
@@ -30,9 +54,14 @@ export const login = createAsyncThunk(
   }
 );
 
+/**
+ *  async method that logs out the user
+ *
+ *
+ */
 export const logout = createAsyncThunk('/users/logout', async (_, thunkApi) => {
   try {
-    // tell db that user logged out
+    // api tell db that user logged out
     const result = true;
     return result;
   } catch (err) {
@@ -44,13 +73,17 @@ export const logout = createAsyncThunk('/users/logout', async (_, thunkApi) => {
   }
 });
 
+/**
+ *  async method that registers user
+ *
+ * @param details - User Creation Details
+ */
 export const register = createAsyncThunk(
   '/users/register',
-  async (
-    { username, password }: { username: string; password: string },
-    thunkApi
-  ) => {
+  async (details: UserCreationDetails, thunkApi) => {
     try {
+      const { username, password } = details;
+      //api call
       const findUser = users.find((user) => user.username === username);
       if (findUser) {
         throw new Error('Username is taken');

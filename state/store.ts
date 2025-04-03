@@ -7,6 +7,11 @@ export const store = configureStore({
     user: userReducer,
   },
 });
-
+/**
+ *  Rootstate contains all the states
+ */
 export type RootState = ReturnType<typeof store.getState>;
+/**
+ *  contains all the dispatch action types
+ */
 export type AppDispatch = typeof store.dispatch;

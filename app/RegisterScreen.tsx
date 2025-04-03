@@ -9,7 +9,18 @@ interface RegisterError {
   error: string;
 }
 
-export default function RegisterScreen() {
+/**
+ * Register screen component that allows user to register their account
+ *
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <RegisterScreen />
+ * ```
+ * @returns JSX Element representing the Home screen
+ */
+export function RegisterScreen() {
   const [username, setUsername] = useState<string>('mountainexplorer42');
   const [password, setPassword] = useState<string>('test');
   const [confirmPassword, setConfirmPassword] = useState<string>('test');
@@ -91,3 +102,5 @@ export default function RegisterScreen() {
     </View>
   );
 }
+
+export default RegisterScreen;
