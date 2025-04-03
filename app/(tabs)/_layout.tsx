@@ -11,9 +11,7 @@ export default function TabLayout() {
 
   useEffect(() => {
     if (!isLoading) {
-      if (isAuthenticated) {
-        router.replace('/(tabs)');
-      } else {
+      if (!isAuthenticated) {
         router.replace('/LoginScreen');
       }
     }
