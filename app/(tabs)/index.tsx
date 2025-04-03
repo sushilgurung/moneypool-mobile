@@ -13,21 +13,7 @@ import { useRouter } from 'expo-router';
  * @returns JSX Element representing the Home screen
  */
 export default function index() {
-  const { isAuthenticated, isLoading, logout } = useAuth();
-
   const { User } = useSelector((state: RootState) => state.user);
-  const router = useRouter();
-
-  /**
-   * Handles authentication redirects to login screen
-   */
-  useEffect(() => {
-    if (!isLoading) {
-      if (!isAuthenticated) {
-        router.replace('/LoginScreen');
-      }
-    }
-  }, [isAuthenticated, isLoading, router]);
 
   return (
     <View className="flex-1 p-6 bg-gray-100 justify-center">
@@ -39,12 +25,6 @@ export default function index() {
           <Text className="text-sm text-gray-500 mb-4">{User.user_id}</Text>
         </View>
       ) : null}
-
-      <Pressable className="bg-blue-600 py-4 rounded-lg " onPress={logout}>
-        <Text className="text-white text-center font-semibold">
-          Logout tabs
-        </Text>
-      </Pressable>
     </View>
   );
 }
