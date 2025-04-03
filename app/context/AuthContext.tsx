@@ -65,7 +65,7 @@ export default function AuthProvider({
       if (result.user_id) {
         await SecureStore.setItemAsync('username', username);
         await SecureStore.setItemAsync('password', password);
-        router.replace('/(tabs)/' as any);
+        router.replace('/(tabs)');
       }
     } catch (error) {
       if (typeof error === 'object' && error !== null && 'error' in error) {

@@ -2,8 +2,6 @@ import { View, Text, Pressable } from 'react-native';
 import { useAuth } from '../context/AuthContext';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/state/store';
-import { useEffect } from 'react';
-import { useRouter } from 'expo-router';
 
 /**
  * Index screen that displays user information and logout option.
@@ -14,7 +12,7 @@ import { useRouter } from 'expo-router';
  */
 export default function index() {
   const { User } = useSelector((state: RootState) => state.user);
-
+  const { isAuthenticated } = useAuth();
   return (
     <View className="flex-1 p-6 bg-gray-100 justify-center">
       {User ? (
