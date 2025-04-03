@@ -1,19 +1,18 @@
-import React from 'react';
-import { Pressable, Text, View } from 'react-native';
-import { useRouter } from 'expo-router';
-import { useAuth } from './context/AuthContext';
-import { useEffect } from 'react';
-import { RootState } from '@/state/store';
+import { View, Text, Pressable } from 'react-native';
+import { useAuth } from '../context/AuthContext';
 import { useSelector } from 'react-redux';
+import { RootState } from '@/state/store';
+import { useEffect } from 'react';
+import { useRouter } from 'expo-router';
 
 /**
- * Home screen component that displays user information and logout option.
+ * Index screen that displays user information and logout option.
  * Requires authentication - redirects to login if user is not authenticated.
  *
  * ```
  * @returns JSX Element representing the Home screen
  */
-export function HomeScreen() {
+export default function index() {
   const { isAuthenticated, isLoading, logout } = useAuth();
 
   const { User } = useSelector((state: RootState) => state.user);
@@ -42,10 +41,10 @@ export function HomeScreen() {
       ) : null}
 
       <Pressable className="bg-blue-600 py-4 rounded-lg " onPress={logout}>
-        <Text className="text-white text-center font-semibold">Logout</Text>
+        <Text className="text-white text-center font-semibold">
+          Logout tabs
+        </Text>
       </Pressable>
     </View>
   );
 }
-
-export default HomeScreen;

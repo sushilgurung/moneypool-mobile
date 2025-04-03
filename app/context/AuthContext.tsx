@@ -63,10 +63,9 @@ export default function AuthProvider({
       setIsLoading(true);
       const result = await dispatch(login({ username, password })).unwrap();
       if (result.user_id) {
-        console.log('login');
         await SecureStore.setItemAsync('username', username);
         await SecureStore.setItemAsync('password', password);
-        router.replace('/HomeScreen');
+        router.replace('/(tabs)/' as any);
       }
     } catch (error) {
       if (typeof error === 'object' && error !== null && 'error' in error) {

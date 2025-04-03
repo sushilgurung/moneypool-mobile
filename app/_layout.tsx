@@ -18,10 +18,10 @@ export function RootLayout() {
     <Provider store={store}>
       <AuthProvider>
         <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
           <Stack.Screen name="index" />
           <Stack.Screen name="LoginScreen" />
           <Stack.Screen name="RegisterScreen" />
-          <Stack.Screen name="HomeScreen" />
         </Stack>
       </AuthProvider>
     </Provider>
