@@ -12,8 +12,7 @@ export const users: user[] = [
     user_id: 1001,
     username: 'alex_smith',
     email: 'alex.smith@example.com',
-    password_hash:
-      '$2a$12$HKu4ezT0xFzwBRE7Wspm2OQs1cjU1mZ/QsJEEl12SfMSG/W2VmMRO',
+    password_hash: 'test',
     first_name: 'Alex',
     last_name: 'Smith',
     verified: true,

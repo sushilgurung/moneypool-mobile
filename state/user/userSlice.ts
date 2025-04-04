@@ -1,11 +1,12 @@
-import { users, User } from '@/fakeData/fake';
+import { users } from '@/fakeData/data';
+import { user } from '@/fakeData/schema';
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 /**
  *  holds the state for userSlice
  */
 export type UserState = {
-  User: User | null;
+  User: user | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 };
@@ -124,7 +125,7 @@ const userSlice = createSlice({
         state.status = 'loading';
         state.error = null;
       })
-      .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
+      .addCase(login.fulfilled, (state, action: PayloadAction<user>) => {
         state.status = 'succeeded';
         state.User = action.payload;
       })

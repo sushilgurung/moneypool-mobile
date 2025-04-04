@@ -19,7 +19,7 @@ export default function TabLayout() {
 
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: 'blue', headerShown: false }}>
-      <Tabs.Screen name="MoneyPool" />
+      <Tabs.Screen name="Contact" />
       <Tabs.Screen name="index" />
       <Tabs.Screen name="Account" />
     </Tabs>

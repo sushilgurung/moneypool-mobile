@@ -14,7 +14,7 @@ import { router } from 'expo-router';
  */
 
 export default function LoginScreen() {
-  const [username, setUsername] = useState<string>('mountainexplorer42');
+  const [username, setUsername] = useState<string>('alex_smith');
   const [password, setPassword] = useState<string>('test');
 
   const { login } = useAuth();
