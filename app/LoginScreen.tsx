@@ -4,13 +4,11 @@ import { useAuth } from './context/AuthContext';
 import { router } from 'expo-router';
 
 /**
- * LoginScreen component for user authentication.
+ * Component that renders the LoginScreen component for user authentication. Has
+ * a username and password input with a button to login and another button
+ * to switch to registration
  *
- * This component provides a user interface for logging into the application.
- * It includes input fields for username and password, along with buttons to
- * submit login credentials or navigate to the registration screen.
- *
- * @returns {JSX.Element} A form with username and password inputs and action buttons
+ * @returns {JSX.Element} Login Form Screen
  */
 
 export default function LoginScreen() {

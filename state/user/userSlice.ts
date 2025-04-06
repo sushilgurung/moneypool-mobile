@@ -3,7 +3,11 @@ import { user } from '@/fakeData/schema';
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 /**
- *  holds the state for userSlice
+ * State interface for the user slice of the Redux store
+ * @typedef {Object} UserState
+ * @property {user|null} User - The currently logged in user or null if no user is logged in
+ * @property {'idle'|'loading'|'succeeded'|'failed'} status - Current status of user-related operations
+ * @property {string|null} error - Error message if any operation fails, or null
  */
 export type UserState = {
   User: user | null;
@@ -12,7 +16,10 @@ export type UserState = {
 };
 
 /**
- *  used to login user
+ * Credentials required for user login
+ * @typedef {Object} UserLoginDetails
+ * @property {string} username - User's username
+ * @property {string} password - User's password (will be hashed)
  */
 export type UserLoginDetails = {
   username: string;
@@ -20,7 +27,11 @@ export type UserLoginDetails = {
 };
 
 /**
- *  used in creation of user
+ * Information required to create a new user account
+ * @typedef {Object} UserCreationDetails
+ * @property {string} username - Desired username for the new account
+ * @property {string} password - Password for the new account
+ * @property {string} [email] - Optional email address for the new account
  */
 export type UserCreationDetails = {
   username: string;
@@ -29,9 +40,13 @@ export type UserCreationDetails = {
 };
 
 /**
- *  async method that logs in user by making api call
+ * Async thunk action that authenticates a user
  *
- * @param details - User Login Details
+ * Makes an API call to verify user credentials and retrieves user data upon success
+ *
+ * @function login
+ * @returns {Promise<user>} Promise that resolves to the user object on successful login
+ * @throws Will reject with an error message if authentication fails
  */
 export const login = createAsyncThunk(
   '/users/login',
@@ -56,9 +71,13 @@ export const login = createAsyncThunk(
 );
 
 /**
- *  async method that logs out the user
+ * Async thunk action that logs out the current user
  *
+ * Makes an API call to invalidate the user session on the server
  *
+ * @function logout
+ * @returns {Promise<boolean>} Promise that resolves to true on successful logout
+ * @throws Will reject with an error message if logout fails
  */
 export const logout = createAsyncThunk('/users/logout', async (_, thunkApi) => {
   try {
@@ -75,9 +94,13 @@ export const logout = createAsyncThunk('/users/logout', async (_, thunkApi) => {
 });
 
 /**
- *  async method that registers user
+ * Async thunk action that registers a new user
  *
- * @param details - User Creation Details
+ * Makes an API call to create a new user account with the provided details
+ *
+ * @function register
+ * @returns {Promise<boolean>} Promise that resolves to true on successful registration
+ * @throws Will reject with an error message if registration fails (e.g., username taken)
  */
 export const register = createAsyncThunk(
   '/users/register',
@@ -109,6 +132,10 @@ export const register = createAsyncThunk(
   }
 );
 
+/**
+ * Initial state for the user slice
+ * @type {UserState}
+ */
 const initialState: UserState = {
   User: null,
   status: 'idle',
@@ -121,6 +148,7 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // Login action reducers
       .addCase(login.pending, (state) => {
         state.status = 'loading';
         state.error = null;
@@ -138,6 +166,7 @@ const userSlice = createSlice({
           state.error = action.error.message || 'Unknown error occurred';
         }
       })
+      // Logout action reducers
       .addCase(logout.pending, (state) => {
         state.status = 'loading';
         state.error = null;
@@ -157,6 +186,7 @@ const userSlice = createSlice({
           state.error = action.error.message || 'Unknown error occurred';
         }
       })
+      // Register action reducers
       .addCase(register.pending, (state) => {
         state.status = 'loading';
         state.error = null;

@@ -6,7 +6,11 @@ import {
   pool_enrollment,
   pool_invitation,
 } from './schema';
-// Create 3 users
+
+/**
+ * Collection of user accounts in the system
+ * @type {user[]}
+ */
 export const users: user[] = [
   {
     user_id: 1001,
@@ -52,7 +56,10 @@ export const users: user[] = [
   },
 ];
 
-// Create payment cards for users
+/**
+ * Collection of payment cards associated with users
+ * @type {user_card[]}
+ */
 export const userCards: user_card[] = [
   {
     card_id: 2001,
@@ -92,7 +99,11 @@ export const userCards: user_card[] = [
   },
 ];
 
-// Create a shared money pool (Alex is the host)
+/**
+ * Shared money pool for group vacation
+ * @type {money_pool}
+ * Fund for group trip to Costa Rica with a target amount of $3000
+ */
 export const moneyPool: money_pool = {
   pool_id: 3001,
   pool_name: 'Summer Vacation 2025',
@@ -107,7 +118,10 @@ export const moneyPool: money_pool = {
   updated_at: '2025-04-01T14:30:15Z',
 };
 
-// Create pool enrollments for all 3 users
+/**
+ * Collection of user enrollments in the vacation money pool
+ * @type {pool_enrollment[]}
+ */
 export const poolEnrollments: pool_enrollment[] = [
   {
     pool_id: 3001,
@@ -126,7 +140,11 @@ export const poolEnrollments: pool_enrollment[] = [
   },
 ];
 
-// Create an invitation (example of how a fourth person might be invited)
+/**
+ * Invitation to join the vacation money pool
+ * @type {pool_invitation}
+ * Invitation created by Alex (host) that expires after one month
+ */
 export const poolInvitation: pool_invitation = {
   invite_code: 'VACATION2025-XYZ',
   creator_id: 1001, // Created by Alex (the host)
@@ -137,7 +155,11 @@ export const poolInvitation: pool_invitation = {
   uses_count: 0,
 };
 
-// Create transactions for the money pool
+/**
+ * Collection of financial transactions for the vacation money pool
+ * @type {money_pool_transactions[]}
+ *  Contains contributions from all members, platform fees, and pending transactions
+ */
 export const moneyPoolTransactions: money_pool_transactions[] = [
   // Alex's contribution
   {

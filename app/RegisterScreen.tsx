@@ -10,15 +10,11 @@ interface RegisterError {
 }
 
 /**
- * Register screen component that allows user to register their account
+ * Component that renders the RegisterScreen component for user creation. Has
+ * a username and password and confirm password input with a button to
+ *  register and another button to switch to login
  *
- *
- * @component
- * @example
- * ```tsx
- * <RegisterScreen />
- * ```
- * @returns JSX Element representing the Home screen
+ * @returns {JSX.Element} Register Form Screen
  */
 export function RegisterScreen() {
   const [username, setUsername] = useState<string>('mountainexplorer42');
@@ -37,7 +33,6 @@ export function RegisterScreen() {
       await dispatch(register({ username, password })).unwrap();
       router.replace('/LoginScreen');
     } catch (payload: any) {
-      // This is the payload from rejectWithValue
       Alert.alert(
         'Registration Failed',
         payload?.error || 'An unknown error occurred'

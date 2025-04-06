@@ -1,6 +1,10 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { money_pool } from '@/fakeData/schema';
 
+/**
+ * Component that renders money pool card in the home page
+ * @returns {JSX.Element}  MoneyPool Card
+ */
 export default function MoneyPoolCard({
   moneyPool,
 }: {

@@ -1,20 +1,15 @@
 import { Pressable, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+/**
+ * Component that renders the menu option that comes under the account section
+ * @returns {JSX.Element}   Menu option item with icon, title and forward chevron
+ */
 export default function MenuOption({
   icon,
   title,
 }: {
-  icon:
-    | 'settings-outline'
-    | 'notifications-outline'
-    | 'shield-outline'
-    | 'person-outline'
-    | 'create-outline'
-    | 'help-circle-outline'
-    | 'color-palette-outline'
-    | 'help-buoy-outline'
-    | 'key-outline';
+  icon: React.ComponentProps<typeof Ionicons>['name'];
   title: string;
 }) {
   return (

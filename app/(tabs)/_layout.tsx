@@ -10,7 +10,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 /**
  * layout where there has to be user to access
  *
- * @returns {TSX.Element} tabs layout
+ * @returns {JSX.Element} tabs layout
  */
 
 export default function TabLayout() {

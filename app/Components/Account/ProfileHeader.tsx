@@ -2,6 +2,11 @@ import { View, Pressable, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/state/store';
 
+/**
+ * Component that renders a header consisting of user details and a button
+ * that allows them to edit their profile
+ * @returns {JSX.Element}  Profile Header which has the user details
+ */
 export default function ProfileHeader() {
   const { User } = useSelector((state: RootState) => state.user);
 

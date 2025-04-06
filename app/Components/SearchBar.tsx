@@ -2,6 +2,10 @@ import { useState } from 'react';
 import { Pressable, Text, View, TextInput } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
+/**
+ * Component that renders the searchbar that will be used to search the moneypools
+ * @returns {JSX.Element}  SearchBar
+ */
 export default function SearchBar() {
   return (
     <View className="w-full max-w-md mx-auto">

@@ -6,9 +6,9 @@ import { accountSections } from './typesAndData';
 /**
  * Component that renders all account options organized in sections
  *
- * @returns {JSX.Element} The account options UI
+ * @returns {JSX.Element} The account options
  */
-export default function Options(): JSX.Element {
+export default function Options() {
   return (
     <View>
       {accountSections.map((section) => (

@@ -1,25 +1,15 @@
-import {
-  View,
-  Text,
-  Pressable,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
-import { useAuth } from '../context/AuthContext';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/state/store';
-import { poolEnrollments, moneyPool } from '@/fakeData/data';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
+
+import { moneyPool } from '@/fakeData/data';
 import MoneyPoolCard from '../Components/MoneyPoolCard';
-import {
-  Feather,
-  AntDesign,
-  Ionicons,
-  MaterialIcons,
-} from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import SearchBar from '../Components/SearchBar';
 
+/**
+ *  Screen that user sees when first log in, it contains scroll view of all the money pools
+ * @returns {JSX.Element} Home Screen
+ */
 export default function index() {
-  const { User } = useSelector((state: RootState) => state.user);
   return (
     <View className="flex h-full bg-gray-100 ">
       <View className="primary-bg flex flex-col h-4/5 p-1 pt-10 gap-10 ">

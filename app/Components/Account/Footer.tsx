@@ -5,6 +5,10 @@ import { useAuth } from '@/app/context/AuthContext';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 
+/**
+ * Account Footer which contains the logout button
+ * @returns {JSX.Element}  Account Footer
+ */
 export default function Footer() {
   const { User } = useSelector((state: RootState) => state.user);
   const { logout } = useAuth();
