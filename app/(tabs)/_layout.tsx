@@ -7,6 +7,12 @@ import { useRouter } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
+/**
+ * layout where there has to be user to access
+ *
+ * @returns {TSX.Element} tabs layout
+ */
+
 export default function TabLayout() {
   const { isAuthenticated, isLoading } = useAuth();
   const router = useRouter();

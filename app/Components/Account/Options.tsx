@@ -1,68 +1,14 @@
 import { View, Text } from 'react-native';
 import MenuOption from './MenuOption';
 import { Ionicons } from '@expo/vector-icons';
-/** all the options */
-const accountSections = [
-  {
-    id: 'personal',
-    title: 'Personal Information',
-    icon: 'person-outline',
-    items: [
-      {
-        id: 'profile',
-        title: 'Edit Profile',
-        icon: 'create-outline',
-        route: '/profile',
-      },
-      {
-        id: 'password',
-        title: 'Change Password',
-        icon: 'key-outline',
-        route: '/password',
-      },
-      {
-        id: 'notification',
-        title: 'Notification Settings',
-        icon: 'notifications-outline',
-        route: '/notifications',
-      },
-    ],
-  },
-  {
-    id: 'app',
-    title: 'App Settings',
-    icon: 'settings-outline',
-    items: [
-      {
-        id: 'theme',
-        title: 'App Theme',
-        icon: 'color-palette-outline',
-        route: '/theme',
-      },
+import { accountSections } from './typesAndData';
 
-      {
-        id: 'privacy',
-        title: 'Privacy Settings',
-        icon: 'shield-outline',
-        route: '/privacy',
-      },
-    ],
-  },
-  {
-    id: 'support',
-    title: 'Support',
-    icon: 'help-buoy-outline',
-    items: [
-      {
-        id: 'help',
-        title: 'Help ',
-        icon: 'help-circle-outline',
-        route: '/help',
-      },
-    ],
-  },
-];
-export default function Options() {
+/**
+ * Component that renders all account options organized in sections
+ *
+ * @returns {JSX.Element} The account options UI
+ */
+export default function Options(): JSX.Element {
   return (
     <View>
       {accountSections.map((section) => (
