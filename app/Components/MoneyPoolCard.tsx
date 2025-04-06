@@ -53,7 +53,7 @@ export default function MoneyPoolCard({
   };
 
   return (
-    <View className="rounded-xl bg-white p-4 shadow-md mb-4">
+    <View className=" bg-white p-4 shadow-md mb-4 ml-4 mr-4">
       {/* Header */}
       <View className="flex-row justify-between items-center mb-2">
         <Text className="text-lg font-bold text-gray-800">{pool_name}</Text>
