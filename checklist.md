@@ -10,7 +10,7 @@
 - [ ] email registration
 - [ ] push notification
 - [ ] websocket
-- [ ]
+- [ ] authentication
 - [ ]
 - [ ]
 - [ ]

@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from '@/state/store';
 import { login, logout } from '@/state/user/userSlice';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
+import * as LocalAuthentication from 'expo-local-authentication';
 
 export type AuthContextType = {
   isLoading: boolean;
@@ -13,6 +14,9 @@ export type AuthContextType = {
   login: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   error: string | null;
+  handleBiometricAuth: () => Promise<void>;
+  isBiometricSupported: boolean;
+  bioAuth: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -26,6 +30,42 @@ export default function AuthProvider({
   const dispatch = useDispatch<AppDispatch>();
   const { User, error, status } = useSelector((state: RootState) => state.user);
   const router = useRouter();
+
+  //biometrics
+  const [isBiometricSupported, setIsBiometricSupported] =
+    useState<boolean>(false);
+  const [bioAuth, setBioAuth] = useState<boolean>(false);
+
+  useEffect(() => {
+    checkBiometricsCompatibility();
+  }, []);
+
+  async function handleBiometricAuth() {
+    const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
+
+    if (!savedBiometrics) {
+      return alert(
+        'Biometric authentication not set up on your device. Please set up biometrics in your device settings.'
+      );
+    }
+
+    const biometricAuth = await LocalAuthentication.authenticateAsync({
+      promptMessage: 'Login with Biometrics',
+      cancelLabel: 'Cancel',
+      disableDeviceFallback: false,
+    });
+
+    if (biometricAuth.success) {
+      setBioAuth(true);
+    } else {
+      setBioAuth(false);
+    }
+  }
+
+  async function checkBiometricsCompatibility() {
+    const compatible = await LocalAuthentication.hasHardwareAsync();
+    setIsBiometricSupported(compatible);
+  }
 
   useEffect(() => {
     // Check for saved credentials on app start
@@ -110,6 +150,9 @@ export default function AuthProvider({
     login: loginHandler,
     logout: logoutHandler,
     error,
+    handleBiometricAuth,
+    isBiometricSupported,
+    bioAuth,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

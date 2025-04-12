@@ -51,6 +51,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="test"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <FontAwesome5 name="swimming-pool" size={24} color={color} />
+          ),
+          title: 'test',
+        }}
+      />
+      <Tabs.Screen
         name="Account"
         options={{
           tabBarIcon: ({ color }) => (
