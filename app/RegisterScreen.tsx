@@ -6,9 +6,6 @@ import { AppDispatch } from '@/state/store';
 import { register } from '@/state/user/userSlice';
 import AuthForm from './Components/Auth/AuthForm';
 import { AuthData } from './Components/Auth/AuthForm';
-interface RegisterError {
-  error: string;
-}
 
 /**
  * Component that renders the RegisterScreen component for user creation. Has
@@ -29,7 +26,7 @@ export function RegisterScreen() {
 
     try {
       await dispatch(register({ username, password })).unwrap();
-      router.replace('/LoginScreen');
+      router.replace('/');
     } catch (payload: any) {
       Alert.alert(
         'Registration Failed',
@@ -39,7 +36,7 @@ export function RegisterScreen() {
   }
 
   return (
-    <View className="flex-1 p-6 bg-white justify-center">
+    <View className="flex-1  bg-white justify-center">
       <AuthForm formType="Register" onSubmit={handleRegister} />
     </View>
   );
