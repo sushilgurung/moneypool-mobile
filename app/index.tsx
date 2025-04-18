@@ -15,9 +15,5 @@ export default function index() {
     login(data.username, data.password);
   }
 
-  return (
-    <View className="flex-1  bg-white justify-center">
-      <AuthForm formType="Login" onSubmit={handleLogin} />
-    </View>
-  );
+  return <AuthForm formType="Login" onSubmit={handleLogin} />;
 }

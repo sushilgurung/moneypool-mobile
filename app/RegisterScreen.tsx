@@ -35,11 +35,7 @@ export function RegisterScreen() {
     }
   }
 
-  return (
-    <View className="flex-1  bg-white justify-center">
-      <AuthForm formType="Register" onSubmit={handleRegister} />
-    </View>
-  );
+  return <AuthForm formType="Register" onSubmit={handleRegister} />;
 }
 
 export default RegisterScreen;
