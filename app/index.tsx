@@ -11,7 +11,7 @@ import AuthForm, { AuthData } from './Components/Auth/AuthForm';
 export default function index() {
   const { login } = useAuth();
 
-  function handleLogin(data: AuthData) {
+  async function handleLogin(data: AuthData) {
     login(data.username, data.password);
   }
 

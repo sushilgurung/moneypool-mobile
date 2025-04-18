@@ -10,7 +10,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 type authType = {
   formType: 'Login' | 'Register';
-  onSubmit: (data: AuthData) => void;
+  onSubmit: (data: AuthData) => Promise<void>;
 };
 
 export interface AuthData {
@@ -60,18 +60,7 @@ export default function AuthForm({ formType, onSubmit }: authType) {
           secureTextEntry
           placeholder="Enter your password"
         />
-        {formType === 'Register' ? (
-          <>
-            <Text className="text-gray-600 mb-2">Confirm Password</Text>
-            <TextInput
-              className="border border-gray-300 rounded-md p-3 mb-6 text-gray-800"
-              onChangeText={setConfirmPassword}
-              value={confirmPassword}
-              secureTextEntry
-              placeholder="Enter your password"
-            />
-          </>
-        ) : null}
+
         <TouchableOpacity
           className="primary-bg py-5  rounded-md"
           onPress={async () =>
@@ -86,7 +75,18 @@ export default function AuthForm({ formType, onSubmit }: authType) {
           <TouchableOpacity className="mt-4">
             <Text className="text-center">Forgot Password?</Text>
           </TouchableOpacity>
-        ) : null}
+        ) : (
+          <>
+            <Text className="text-gray-600 mb-2">Confirm Password</Text>
+            <TextInput
+              className="border border-gray-300 rounded-md p-3 mb-6 text-gray-800"
+              onChangeText={setConfirmPassword}
+              value={confirmPassword}
+              secureTextEntry
+              placeholder="Enter your password"
+            />
+          </>
+        )}
       </View>
 
       <View className=" h-1/4  flex flex-col justify-center p-6  ">
