@@ -15,9 +15,8 @@ export type AuthContextType = {
   logout: () => Promise<void>;
   autoLogin: () => Promise<boolean>;
   error: string | null;
-  handleBiometricAuth: () => Promise<void>;
+  handleBiometricAuth: () => Promise<boolean>;
   isBiometricSupported: boolean;
-  bioAuth: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -29,25 +28,29 @@ export default function AuthProvider({
 }) {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch<AppDispatch>();
-  const { User, error, status } = useSelector((state: RootState) => state.user);
+  const { User, error } = useSelector((state: RootState) => state.user);
   const router = useRouter();
 
   //biometrics
   const [isBiometricSupported, setIsBiometricSupported] =
     useState<boolean>(false);
-  const [bioAuth, setBioAuth] = useState<boolean>(false);
 
   useEffect(() => {
     checkBiometricsCompatibility();
   }, []);
 
-  async function handleBiometricAuth() {
+  /**
+   *
+   * @returns true or false depending on if biometrics worked
+   */
+  async function handleBiometricAuth(): Promise<boolean> {
     const savedBiometrics = await LocalAuthentication.isEnrolledAsync();
 
     if (!savedBiometrics) {
-      return alert(
+      alert(
         'Biometric authentication not set up on your device. Please set up biometrics in your device settings.'
       );
+      return false;
     }
 
     const biometricAuth = await LocalAuthentication.authenticateAsync({
@@ -57,16 +60,19 @@ export default function AuthProvider({
     });
 
     if (biometricAuth.success) {
-      setBioAuth(true);
+      return true;
     } else {
-      setBioAuth(false);
+      return false;
     }
   }
 
+  /** function to check if device can use biometrics */
   async function checkBiometricsCompatibility() {
     const compatible = await LocalAuthentication.hasHardwareAsync();
     setIsBiometricSupported(compatible);
   }
+
+  /** auto logins in user if there are stored details for when user closes app */
 
   async function autoLogin(): Promise<boolean> {
     setIsLoading(true);
@@ -129,7 +135,11 @@ export default function AuthProvider({
     }
   };
 
-  const logoutHandler = async () => {
+  /**
+   * Logs out user and removes all stored details
+   */
+
+  async function logoutHandler() {
     try {
       setIsLoading(true);
 
@@ -150,7 +160,7 @@ export default function AuthProvider({
     } finally {
       setIsLoading(false);
     }
-  };
+  }
 
   const value = {
     isLoading,
@@ -160,7 +170,6 @@ export default function AuthProvider({
     error,
     handleBiometricAuth,
     isBiometricSupported,
-    bioAuth,
     autoLogin,
   };
 
