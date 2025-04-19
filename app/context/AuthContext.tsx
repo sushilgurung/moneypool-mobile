@@ -53,6 +53,10 @@ export default function AuthProvider({
       return false;
     }
 
+    if (!User || !User.using_biometrics) {
+      return false;
+    }
+
     const biometricAuth = await LocalAuthentication.authenticateAsync({
       promptMessage: 'Login with Biometrics',
       cancelLabel: 'Cancel',

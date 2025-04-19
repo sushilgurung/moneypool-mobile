@@ -6,7 +6,8 @@ import { useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { TouchableOpacity } from 'react-native';
 /**
  * layout where there has to be user to access
  *
@@ -60,11 +61,28 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="Account"
+        name="Setting"
         options={{
           tabBarIcon: ({ color }) => (
-            <Ionicons name="person-circle" size={24} color={color} />
+            <Ionicons name="settings" size={24} color={color} />
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="Setting/biometrics"
+        options={{
+          href: null,
+          headerShown: true,
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.replace('/(tabs)/Setting')}>
+              <MaterialIcons
+                name="keyboard-arrow-left"
+                size={36}
+                color="black"
+              />
+            </TouchableOpacity>
+          ),
+          headerTitle: 'Biometrics',
         }}
       />
     </Tabs>

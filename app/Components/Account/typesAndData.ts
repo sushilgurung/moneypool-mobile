@@ -73,7 +73,7 @@ export const accountSections: Section[] = [
         id: 'biometrics',
         title: 'Biometrics Settings',
         icon: 'scan',
-        route: '/privacy',
+        route: '/(tabs)/Setting/biometrics',
       },
       {
         id: 'privacy',

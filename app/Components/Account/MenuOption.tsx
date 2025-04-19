@@ -8,19 +8,19 @@ import { Ionicons } from '@expo/vector-icons';
 export default function MenuOption({
   icon,
   title,
+  onPress,
 }: {
   icon: React.ComponentProps<typeof Ionicons>['name'];
+  onPress: () => void;
   title: string;
 }) {
   return (
-    <TouchableOpacity className="flex-row items-center px-4 py-3 border-b border-gray-100 active:bg-gray-50">
+    <TouchableOpacity
+      onPress={onPress}
+      className="flex-row items-center px-4 py-3 border-b border-gray-100 active:bg-gray-50"
+    >
       <Ionicons name={icon} size={22} className="text-gray-600" />
       <Text className="flex-1 ml-3 text-gray-800 font-medium">{title}</Text>
-      <Ionicons
-        name="chevron-forward-outline"
-        size={18}
-        className="text-gray-400"
-      />
     </TouchableOpacity>
   );
 }

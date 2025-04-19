@@ -2,6 +2,7 @@ import { View, Text } from 'react-native';
 import MenuOption from './MenuOption';
 import { Ionicons } from '@expo/vector-icons';
 import { accountSections } from './typesAndData';
+import { useRouter } from 'expo-router';
 
 /**
  * Component that renders all account options organized in sections
@@ -9,6 +10,8 @@ import { accountSections } from './typesAndData';
  * @returns {JSX.Element} The account options
  */
 export default function Options() {
+  const router = useRouter();
+
   return (
     <View>
       {accountSections.map((section) => (
@@ -23,7 +26,12 @@ export default function Options() {
           </View>
           <View className="bg-white rounded-xl mx-4 overflow-hidden">
             {section.items.map((item) => (
-              <MenuOption key={item.id} icon={item.icon} title={item.title} />
+              <MenuOption
+                key={item.id}
+                icon={item.icon}
+                title={item.title}
+                onPress={() => router.push('/(tabs)/Setting/biometrics')}
+              />
             ))}
           </View>
         </View>

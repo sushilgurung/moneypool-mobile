@@ -9,7 +9,7 @@ import Footer from '../Components/Account/Footer';
  * Account Screen where user can change settings, edit profile or logout
  * @returns {JSX.Element} Account Screen
  */
-export default function AccountScreen() {
+export default function SettingsScreen() {
   const { User } = useSelector((state: RootState) => state.user);
 
   return (
