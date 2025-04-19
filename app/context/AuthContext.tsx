@@ -13,6 +13,7 @@ export type AuthContextType = {
   isAuthenticated: boolean;
   login: (username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  autoLogin: () => Promise<boolean>;
   error: string | null;
   handleBiometricAuth: () => Promise<void>;
   isBiometricSupported: boolean;
@@ -67,31 +68,38 @@ export default function AuthProvider({
     setIsBiometricSupported(compatible);
   }
 
-  useEffect(() => {
-    // Check for saved credentials on app start
-    const checkAuth = async () => {
-      try {
-        const storedUsername = await SecureStore.getItemAsync('username');
-        const storedPassword = await SecureStore.getItemAsync('password');
+  async function autoLogin(): Promise<boolean> {
+    setIsLoading(true);
+    try {
+      const storedUsername = await SecureStore.getItemAsync('username');
+      const storedPassword = await SecureStore.getItemAsync('password');
+      console.log('secure ', storedUsername, storedPassword);
 
-        if (storedUsername && storedPassword) {
-          // Attempt to login with stored credentials
-          await dispatch(
-            login({
-              username: storedUsername,
-              password: storedPassword,
-            })
-          ).unwrap();
-        }
-      } catch (error) {
-        console.log('Auto login failed:', error);
-      } finally {
-        setIsLoading(false);
+      if (!storedUsername || !storedPassword) {
+        console.log('No stored credentials.');
+        return false;
       }
-    };
 
-    checkAuth();
-  }, []);
+      const result = await dispatch(
+        login({
+          username: storedUsername,
+          password: storedPassword,
+        })
+      ).unwrap();
+
+      if (result.user_id) {
+        return true;
+      } else {
+        console.log('Login failed: invalid credentials or backend error.');
+        return false;
+      }
+    } catch (error) {
+      console.error('Auto login failed:', error);
+      return false;
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   /**
    * Handles user login and stores details in SecureStore
@@ -153,6 +161,7 @@ export default function AuthProvider({
     handleBiometricAuth,
     isBiometricSupported,
     bioAuth,
+    autoLogin,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

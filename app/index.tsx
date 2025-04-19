@@ -1,6 +1,7 @@
-import { View } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useAuth } from './context/AuthContext';
 import AuthForm, { AuthData } from './Components/Auth/AuthForm';
+import { useEffect } from 'react';
 
 /**
  * Component that renders the login auth form
@@ -9,7 +10,17 @@ import AuthForm, { AuthData } from './Components/Auth/AuthForm';
  */
 
 export default function index() {
-  const { login } = useAuth();
+  const { login, autoLogin } = useAuth();
+  const router = useRouter();
+  useEffect(() => {
+    handleAutoLogin();
+  }, []);
+
+  async function handleAutoLogin() {
+    if (await autoLogin()) {
+      router.replace('/(tabs)');
+    }
+  }
 
   async function handleLogin(data: AuthData) {
     login(data.username, data.password);
