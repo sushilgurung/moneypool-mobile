@@ -152,6 +152,8 @@ export default function AuthProvider({
         await SecureStore.deleteItemAsync('username');
         await SecureStore.deleteItemAsync('password');
       }
+
+      router.replace('/LoginScreen');
     } catch (error) {
       if (typeof error === 'object' && error !== null && 'error' in error) {
         Alert.alert(

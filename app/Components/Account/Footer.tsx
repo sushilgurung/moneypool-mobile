@@ -43,7 +43,7 @@ export default function Footer() {
           </Text>
           <Pressable
             className="bg-blue-600 px-8 py-3 rounded-lg"
-            onPress={() => router.push('/LoginScreen')}
+            onPress={() => router.replace('/LoginScreen')}
           >
             <Text className="text-white font-semibold">Login</Text>
           </Pressable>

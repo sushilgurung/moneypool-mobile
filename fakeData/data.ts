@@ -112,6 +112,7 @@ export const moneyPool: money_pool = {
   pool_name: 'Summer Vacation 2025',
   description:
     'Fund for our group trip to Costa Rica in July 2025. Target: $3000 for accommodations and activities.',
+  color: 'red',
   host_user_id: 1001, // Alex is the host
   target_amount: 3000,
   current_amount: 1750, // Sum of completed contributions

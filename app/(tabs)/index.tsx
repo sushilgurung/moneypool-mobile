@@ -1,8 +1,8 @@
-import { View, ScrollView, TouchableOpacity } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import { moneyPool } from '@/fakeData/data';
-import MoneyPoolCard from '../Components/MoneyPoolCard';
-import { AntDesign } from '@expo/vector-icons';
+import MoneyPoolCard from '../Components/MoneyPoolCard/MoneyPoolCard';
+
 import SearchBar from '../Components/SearchBar';
 
 /**
@@ -12,9 +12,9 @@ import SearchBar from '../Components/SearchBar';
 export default function index() {
   return (
     <View className="flex h-full bg-gray-100 ">
-      <View className="primary-bg flex flex-col h-4/5 p-1 pt-10 gap-10 ">
+      <View className="bg-white flex flex-col h-4/5 p-1 pt-10 gap-10 ">
         <SearchBar />
-        <ScrollView>
+        <ScrollView className="h-4/5">
           <MoneyPoolCard moneyPool={moneyPool} />
           <MoneyPoolCard moneyPool={moneyPool} />
           <MoneyPoolCard moneyPool={moneyPool} />
@@ -23,14 +23,14 @@ export default function index() {
           <MoneyPoolCard moneyPool={moneyPool} />
         </ScrollView>
       </View>
-      <View className=" w-full flex justify-center  items-center primary-bg h-1/5">
+      {/* <View className=" w-full flex justify-center  items-center primary-bg h-1/5">
         <TouchableOpacity
           className="bg-white w-28 h-28 rounded-full items-center justify-center shadow-lg "
           onPress={() => console.log('Circular Add Button pressed')}
         >
           <AntDesign name="plus" size={48} color="purple" />
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 }

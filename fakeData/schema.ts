@@ -58,6 +58,7 @@ export type user_card = {
  * @property pool_id - Unique identifier for the money pool
  * @property pool_name - Display name for the pool
  * @property description - Detailed description of the pool's purpose
+ * @property color - color of the money pool
  * @property host_user_id - Reference to the user who created/hosts this pool
  * @property target_amount - Goal amount to be collected
  * @property current_amount - Current total collected amount
@@ -70,6 +71,7 @@ export type money_pool = {
   pool_id: number;
   pool_name: string;
   description: string;
+  color: string;
   host_user_id: number;
   target_amount: number;
   current_amount: number;
