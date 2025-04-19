@@ -1,4 +1,4 @@
-import { Pressable, Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 /**
@@ -13,7 +13,7 @@ export default function MenuOption({
   title: string;
 }) {
   return (
-    <Pressable className="flex-row items-center px-4 py-3 border-b border-gray-100 active:bg-gray-50">
+    <TouchableOpacity className="flex-row items-center px-4 py-3 border-b border-gray-100 active:bg-gray-50">
       <Ionicons name={icon} size={22} className="text-gray-600" />
       <Text className="flex-1 ml-3 text-gray-800 font-medium">{title}</Text>
       <Ionicons
@@ -21,6 +21,6 @@ export default function MenuOption({
         size={18}
         className="text-gray-400"
       />
-    </Pressable>
+    </TouchableOpacity>
   );
 }

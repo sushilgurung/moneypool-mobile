@@ -24,6 +24,7 @@ export type user = {
   last_active: string;
   session_token?: string;
   device_fingerprint?: string;
+  using_biometrics: boolean;
 };
 
 /**

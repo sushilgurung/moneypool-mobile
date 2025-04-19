@@ -119,6 +119,7 @@ export const register = createAsyncThunk(
           verified: false,
           created_at: new Date().toDateString(),
           last_active: new Date().toDateString(),
+          using_biometrics: false,
         };
         users.push(createdUser);
         return true;
@@ -145,7 +146,13 @@ const initialState: UserState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setUsingBiometrics: (state, action: PayloadAction<boolean>) => {
+      if (state.User) {
+        state.User.using_biometrics = action.payload;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       // Login action reducers

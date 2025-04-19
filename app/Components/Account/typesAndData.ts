@@ -13,7 +13,8 @@ export type MenuOptionIcon =
   | 'help-circle-outline'
   | 'color-palette-outline'
   | 'help-buoy-outline'
-  | 'key-outline';
+  | 'key-outline'
+  | 'scan';
 
 // Define types for our data structure
 export interface MenuItem {
@@ -67,6 +68,12 @@ export const accountSections: Section[] = [
         title: 'App Theme',
         icon: 'color-palette-outline',
         route: '/theme',
+      },
+      {
+        id: 'biometrics',
+        title: 'Biometrics Settings',
+        icon: 'scan',
+        route: '/privacy',
       },
       {
         id: 'privacy',

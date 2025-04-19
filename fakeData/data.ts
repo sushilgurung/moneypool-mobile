@@ -25,6 +25,7 @@ export const users: user[] = [
     session_token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMDAxfQ',
     device_fingerprint: 'fkw920fj20j9s0f2j0s2f',
+    using_biometrics: true,
   },
   {
     user_id: 1002,
@@ -39,6 +40,7 @@ export const users: user[] = [
     session_token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMDAyfQ',
     device_fingerprint: 'ghj567kjh78lkj12nm34',
+    using_biometrics: true,
   },
   {
     user_id: 1003,
@@ -53,6 +55,7 @@ export const users: user[] = [
     session_token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMDAzfQ',
     device_fingerprint: 'lkj645jhg78klo09mnb12',
+    using_biometrics: true,
   },
 ];
 
