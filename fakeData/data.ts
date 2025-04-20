@@ -107,20 +107,22 @@ export const userCards: user_card[] = [
  * @type {money_pool}
  * Fund for group trip to Costa Rica with a target amount of $3000
  */
-export const moneyPool: money_pool = {
-  pool_id: 3001,
-  pool_name: 'Summer Vacation 2025',
-  description:
-    'Fund for our group trip to Costa Rica in July 2025. Target: $3000 for accommodations and activities.',
-  color: 'red',
-  host_user_id: 1001, // Alex is the host
-  target_amount: 3000,
-  current_amount: 1750, // Sum of completed contributions
-  currency: 'USD',
-  status: 'ACTIVE',
-  created_at: '2025-02-01T12:00:00Z',
-  updated_at: '2025-04-01T14:30:15Z',
-};
+export const moneyPools: money_pool[] = [
+  {
+    pool_id: 3001,
+    pool_name: 'Summer Vacation 2025',
+    description:
+      'Fund for our group trip to Costa Rica in July 2025. Target: $3000 for accommodations and activities.',
+    color: 'red',
+    host_user_id: 1001, // Alex is the host
+    target_amount: 3000,
+    current_amount: 1750, // Sum of completed contributions
+    currency: 'USD',
+    status: 'ACTIVE',
+    created_at: '2025-02-01T12:00:00Z',
+    updated_at: '2025-04-01T14:30:15Z',
+  },
+];
 
 /**
  * Collection of user enrollments in the vacation money pool

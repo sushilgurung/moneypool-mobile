@@ -1,15 +1,20 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { money_pool } from '@/fakeData/schema';
 import { LinearGradient } from 'expo-linear-gradient';
+
+type MoneyPoolCardProps = {
+  moneyPool: money_pool;
+  handleRoute: (moneyPool: money_pool) => void;
+};
+
 /**
  * Component that renders money pool card in the home page
  * @returns {JSX.Element}  MoneyPool Card
  */
 export default function MoneyPoolCard({
   moneyPool,
-}: {
-  moneyPool: money_pool;
-}) {
+  handleRoute,
+}: MoneyPoolCardProps) {
   const { pool_name, target_amount, color, current_amount, currency, status } =
     moneyPool;
 
@@ -44,11 +49,11 @@ export default function MoneyPoolCard({
   return (
     <TouchableOpacity
       className={`  shadow-2xl mb-4 ml-8 mr-8   `}
-      // style={{ backgroundColor: color }}
+      onPress={() => handleRoute(moneyPool)}
     >
       <LinearGradient
-        colors={['#7F00FF', '#E100FF', '#FF5252']} // yellow-400, orange-500, red-500
-        locations={[0, 0.5, 1]}
+        colors={['#7F00FF', '#E100FF']}
+        locations={[0.1, 0.9]}
         start={{ x: 0, y: 1 }}
         end={{ x: 1.2, y: 0.7 }}
         style={[{ opacity: 0.9, borderRadius: 16, padding: 16, height: 148 }]}

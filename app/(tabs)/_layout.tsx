@@ -9,7 +9,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { TouchableOpacity, View } from 'react-native';
 /**
- * layout where there has to be user to access
+ * layout where user has to be authenticated to access
  *
  * @returns {JSX.Element} tabs layout
  */
@@ -87,6 +87,10 @@ export default function TabLayout() {
         options={{
           href: null,
           headerShown: true,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: 'none',
+          },
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.replace('/(tabs)/Setting')}>
               <MaterialIcons
@@ -97,6 +101,48 @@ export default function TabLayout() {
             </TouchableOpacity>
           ),
           headerTitle: 'Biometrics',
+        }}
+      />
+      <Tabs.Screen
+        name="MoneyPool/index"
+        options={{
+          href: null,
+          headerShown: true,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: 'none',
+          },
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.replace('/(tabs)')}>
+              <MaterialIcons
+                name="keyboard-arrow-left"
+                size={36}
+                color="black"
+              />
+            </TouchableOpacity>
+          ),
+          headerTitle: '',
+        }}
+      />
+      <Tabs.Screen
+        name="MoneyPool/AddMoney"
+        options={{
+          href: null,
+          headerShown: true,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: 'none',
+          },
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.back()}>
+              <MaterialIcons
+                name="keyboard-arrow-left"
+                size={36}
+                color="black"
+              />
+            </TouchableOpacity>
+          ),
+          headerTitle: '',
         }}
       />
     </Tabs>
