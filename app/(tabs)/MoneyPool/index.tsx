@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { moneyPools } from '@/fakeData/data';
 import { money_pool } from '@/fakeData/schema';
@@ -6,6 +6,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { useAuth } from '@/app/context/AuthContext';
 import { useRouter } from 'expo-router';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/state/store';
 
 export default function Index() {
   const { id } = useLocalSearchParams<{ name: string; id: string }>();
@@ -13,7 +15,9 @@ export default function Index() {
     (pool) => pool.pool_id === Number(id)
   )[0];
 
-  const { handleBiometricAuth, isBiometricSupported } = useAuth();
+  const user = useSelector((state: RootState) => state.user.User);
+
+  const { handleBiometricAuth } = useAuth();
   const router = useRouter();
   function currencySign() {
     if (current.currency === 'USD') {
@@ -22,13 +26,13 @@ export default function Index() {
   }
 
   async function checkMoney() {
-    if (isBiometricSupported) {
+    if (user?.using_biometrics) {
       const result = await handleBiometricAuth();
       if (result) {
         router.push('/(tabs)/MoneyPool/AddMoney');
-        console.log('pass');
       } else {
-        console.log('fail');
+        Alert.alert('Biometrics failed please try again');
+        return;
       }
     }
     router.push('/(tabs)/MoneyPool/AddMoney');

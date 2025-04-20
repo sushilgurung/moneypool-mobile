@@ -25,7 +25,7 @@ export const users: user[] = [
     session_token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMDAxfQ',
     device_fingerprint: 'fkw920fj20j9s0f2j0s2f',
-    using_biometrics: true,
+    using_biometrics: false,
   },
   {
     user_id: 1002,
