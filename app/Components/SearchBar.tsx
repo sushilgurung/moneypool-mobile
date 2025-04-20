@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Pressable, Text, View, TextInput } from 'react-native';
+import { View, TextInput } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 /**
@@ -15,9 +14,6 @@ export default function SearchBar() {
           placeholder="Search..."
           className="w-3/4 bg-transparent px-3 py-1 outline-none"
         />
-        <Pressable className=" secondary-bg  px-4 py-1 rounded-full text-sm font-medium transition-colors">
-          <Text className="text-white">Search</Text>
-        </Pressable>
       </View>
     </View>
   );

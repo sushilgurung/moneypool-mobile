@@ -9,22 +9,29 @@ import { useRouter } from 'expo-router';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/state/store';
 
+/**
+ * Component that renders money pool page with all the detail,s
+ * @returns {JSX.Element}  Index
+ */
 export default function Index() {
   const { id } = useLocalSearchParams<{ name: string; id: string }>();
+
+  //get the right moneypool will be via api
   const current: money_pool = moneyPools.filter(
     (pool) => pool.pool_id === Number(id)
   )[0];
 
   const user = useSelector((state: RootState) => state.user.User);
-
   const { handleBiometricAuth } = useAuth();
   const router = useRouter();
+
   function currencySign() {
     if (current.currency === 'USD') {
       return '$';
     }
   }
 
+  /** checks if user is using biometrics */
   async function checkMoney() {
     if (user?.using_biometrics) {
       const result = await handleBiometricAuth();
