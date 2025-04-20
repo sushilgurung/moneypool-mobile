@@ -54,7 +54,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="CreatePool"
         options={{
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: () => (
             <View
               className="bg-white  justify-center items-center h-16 w-16 rounded-xl "
               style={{ backgroundColor: '#9f2b68' }}
@@ -90,6 +90,7 @@ export default function TabLayout() {
           headerShadowVisible: false,
           headerStyle: {
             backgroundColor: 'none',
+            position: 'absolute',
           },
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.replace('/(tabs)/Setting')}>
@@ -108,9 +109,10 @@ export default function TabLayout() {
         options={{
           href: null,
           headerShown: true,
+          headerTransparent: true,
           headerShadowVisible: false,
           headerStyle: {
-            backgroundColor: 'none',
+            backgroundColor: 'transparent',
           },
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.replace('/(tabs)')}>
