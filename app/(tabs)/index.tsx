@@ -12,14 +12,9 @@ import SearchBar from '../Components/SearchBar';
 export default function index() {
   return (
     <View className="flex h-full bg-gray-100 ">
-      <View className="bg-white flex flex-col h-4/5 p-1 pt-10 gap-10 ">
+      <View className="bg-white flex flex-col  p-1 pt-10 gap-10 pb-4 h-full">
         <SearchBar />
-        <ScrollView className="h-4/5">
-          <MoneyPoolCard moneyPool={moneyPool} />
-          <MoneyPoolCard moneyPool={moneyPool} />
-          <MoneyPoolCard moneyPool={moneyPool} />
-          <MoneyPoolCard moneyPool={moneyPool} />
-          <MoneyPoolCard moneyPool={moneyPool} />
+        <ScrollView className="pb-4">
           <MoneyPoolCard moneyPool={moneyPool} />
         </ScrollView>
       </View>

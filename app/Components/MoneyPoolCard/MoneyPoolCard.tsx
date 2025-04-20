@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { money_pool } from '@/fakeData/schema';
-import Svg, { Circle } from 'react-native-svg';
-import RadialBar from './RadialBar';
+import { LinearGradient } from 'expo-linear-gradient';
 /**
  * Component that renders money pool card in the home page
  * @returns {JSX.Element}  MoneyPool Card
@@ -19,11 +18,10 @@ export default function MoneyPoolCard({
     Math.min((current_amount / target_amount) * 100, 100)
   );
 
-  // Format currency
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: currency,
+      currency: currency || 'USD',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amount);
@@ -33,7 +31,7 @@ export default function MoneyPoolCard({
   const getStatusColor = () => {
     switch (status) {
       case 'ACTIVE':
-        return 'bg-green-500';
+        return 'bg-green-400';
       case 'COMPLETED':
         return 'bg-blue-500';
       case 'CANCELLED':
@@ -44,32 +42,51 @@ export default function MoneyPoolCard({
   };
 
   return (
-    <View
-      className={` p-4 shadow-lg mb-4 ml-4 mr-4 rounded-md `}
+    <TouchableOpacity
+      className={`  shadow-2xl mb-4 ml-8 mr-8   `}
       // style={{ backgroundColor: color }}
     >
-      {/* Header */}
-      <View className="flex-row justify-between items-center mb-2">
-        <Text className="text-lg font-bold text-gray-800">{pool_name}</Text>
-        <View className={`px-2 py-1 rounded-full ${getStatusColor()}`}>
-          <Text className="text-xs font-medium text-white capitalize">
-            {status}
-          </Text>
+      <LinearGradient
+        colors={['#7F00FF', '#E100FF', '#FF5252']} // yellow-400, orange-500, red-500
+        locations={[0, 0.5, 1]}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 1.2, y: 0.7 }}
+        style={[{ opacity: 0.9, borderRadius: 16, padding: 16, height: 148 }]}
+      >
+        {/* Status */}
+        <View
+          className={`absolute ${getStatusColor()} top-5 right-5 h-4 w-4 rounded-full `}
+        ></View>
+        {/* Header */}
+        <View className="flex-row justify-start items-center mb-2 ">
+          <View className="flex justify-between  h-full">
+            <Text className="text-2xl font-bold text-white">{pool_name}</Text>
+            <View className="flex-row gap-1 ">
+              <Text className="text-white font-bold text-lg">
+                {formatCurrency(current_amount)}
+              </Text>
+              <Text className="text-white font-bold text-lg">
+                of {formatCurrency(target_amount)}
+              </Text>
+            </View>
+            <View className="flex  w-full flex-row gap-10  items-center ">
+              {/* Progress bar */}
+              <View
+                className="  w-2/3 h-4 rounded-full"
+                style={{ backgroundColor: 'rgba(255,255,255,0.3)' }}
+              >
+                <View
+                  style={{ width: `${progressPercentage}%` }}
+                  className="h-4 rounded-tl-full rounded-bl-full bg-white opacity-100 "
+                ></View>
+              </View>
+              <Text className="text-white font-bold text-lg">
+                {progressPercentage}%
+              </Text>
+            </View>
+          </View>
         </View>
-      </View>
-
-      {/* Amount info */}
-      <View className="mb-3">
-        <View className="flex-row justify-between items-center mb-1">
-          <Text className="text-gray-500 text-sm">Progress</Text>
-          <Text className="text-gray-500 text-sm">
-            {formatCurrency(current_amount)} / {formatCurrency(target_amount)}
-          </Text>
-        </View>
-
-        {/* Progress bar */}
-        <RadialBar size={60} strokeWidth={5} progress={progressPercentage} />
-      </View>
-    </View>
+      </LinearGradient>
+    </TouchableOpacity>
   );
 }
