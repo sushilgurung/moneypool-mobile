@@ -56,7 +56,7 @@ export default function TabLayout() {
         options={{
           tabBarIcon: () => (
             <View
-              className="bg-white  justify-center items-center h-16 w-16 rounded-xl "
+              className="bg-white  justify-center items-center h-20 w-20 rounded-xl "
               style={{ backgroundColor: '#9f2b68' }}
             >
               <FontAwesome5 name="plus" size={24} color={'white'} />
