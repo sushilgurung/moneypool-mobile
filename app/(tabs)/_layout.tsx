@@ -7,7 +7,7 @@ import { useRouter } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 /**
  * layout where there has to be user to access
  *
@@ -49,6 +49,20 @@ export default function TabLayout() {
             <FontAwesome5 name="swimming-pool" size={24} color={color} />
           ),
           title: 'Money Pools',
+        }}
+      />
+      <Tabs.Screen
+        name="CreatePool"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <View
+              className="bg-white  justify-center items-center h-16 w-16 rounded-xl "
+              style={{ backgroundColor: '#9f2b68' }}
+            >
+              <FontAwesome5 name="plus" size={24} color={'white'} />
+            </View>
+          ),
+          title: '',
         }}
       />
       <Tabs.Screen
