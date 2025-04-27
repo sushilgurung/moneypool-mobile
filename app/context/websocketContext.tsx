@@ -6,10 +6,11 @@ type socketState = 'disconnected' | 'connected' | 'connecting' | 'error';
 export type WebSocketContextType = {
   messages: Message[];
   connectionState: socketState;
+  socket: Socket | null;
 };
 
 type Message = {
-  user_id: number;
+  user_id: string;
   message: string;
   money_pool_id: string;
   date: string;
@@ -43,17 +44,15 @@ export default function WebSocketProvider({
 
     socketRef.current.on('connect', () => {
       console.log('Connected to server with ID:', socketRef.current?.id);
-      setConnectionState('connected');
 
-      socketRef.current?.emit('message', {
-        text: 'yoo',
-        timestamp: new Date(),
-      });
+      setConnectionState('connected');
     });
 
     // Handle messages from server
     socketRef.current.on('message', (data) => {
-      console.log('Message from server:', data);
+      let message: Message = data.data;
+      console.log(message);
+      setMessages((prev) => [...prev, message]);
     });
 
     // Handle connection errors
@@ -84,6 +83,7 @@ export default function WebSocketProvider({
   const value = {
     messages,
     connectionState,
+    socket: socketRef.current,
   };
 
   return (
