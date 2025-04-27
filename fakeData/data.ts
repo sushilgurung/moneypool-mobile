@@ -29,9 +29,9 @@ export const users: user[] = [
   },
   {
     user_id: 1002,
-    username: 'taylor_jones',
+    username: 'top',
     email: 'taylor.jones@example.com',
-    password_hash: '$2a$12$6jf49Kjsd8fKJHDFGHu567JHGFtyr56kjhgsdfg65jhgDFG',
+    password_hash: 'test2',
     first_name: 'Taylor',
     last_name: 'Jones',
     verified: true,
