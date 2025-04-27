@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { store } from '@/state/store';
 import '../global.css';
 import AuthProvider from './context/AuthContext';
+import WebSocketProvider from './context/websocketContext';
 
 /**
  * Layout component that has all the screens via Stack.
@@ -17,12 +18,14 @@ export function RootLayout() {
   return (
     <Provider store={store}>
       <AuthProvider>
-        <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
-          <Stack.Screen name="index" />
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="LoginScreen" />
-          <Stack.Screen name="RegisterScreen" />
-        </Stack>
+        <WebSocketProvider>
+          <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
+            <Stack.Screen name="index" />
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="LoginScreen" />
+            <Stack.Screen name="RegisterScreen" />
+          </Stack>
+        </WebSocketProvider>
       </AuthProvider>
     </Provider>
   );

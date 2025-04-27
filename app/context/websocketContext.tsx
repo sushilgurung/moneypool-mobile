@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, createContext, useContext } from 'react';
+import { io, Socket } from 'socket.io-client';
+import { fetch } from 'expo/fetch';
 
-type socketState = 'disconnected' | 'connected' | 'connecting';
+type socketState = 'disconnected' | 'connected' | 'connecting' | 'error';
 export type WebSocketContextType = {
   messages: Message[];
   connectionState: socketState;
@@ -25,41 +27,52 @@ export default function WebSocketProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const socketRef = useRef<WebSocket | null>(null);
+  const socketRef = useRef<Socket | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
 
   const [connectionState, setConnectionState] =
-    useState<socketState>('disconnected');
+    useState<socketState>('connecting');
 
-  useEffect(() => {}, []);
-
-  //setting up websocket
   useEffect(() => {
-    socketRef.current = new WebSocket('ws://localhost:3000');
-    socketRef.current.addEventListener('open', (event) => {
-      console.log('Connected to WebSocket server');
+    socketRef.current = io(process.env.EXPO_PUBLIC_URL, {
+      transports: ['websocket'],
+      forceNew: true,
+      reconnectionAttempts: 5,
+      timeout: 10000,
+    });
+
+    socketRef.current.on('connect', () => {
+      console.log('Connected to server with ID:', socketRef.current?.id);
       setConnectionState('connected');
-      socketRef.current?.send('Connection established');
-      getMessages();
+
+      socketRef.current?.emit('message', {
+        text: 'yoo',
+        timestamp: new Date(),
+      });
     });
 
-    //listern for transactions
-    socketRef.current.addEventListener('message', (event) => {
-      const message =
-        typeof event.data === 'string' && event.data.startsWith('{')
-          ? JSON.parse(event.data)
-          : event.data;
-      setMessages((prev) => [...prev, message]);
+    // Handle messages from server
+    socketRef.current.on('message', (data) => {
+      console.log('Message from server:', data);
     });
 
-    // Handle connection closure
-    socketRef.current.addEventListener('close', () => {
-      console.log('Disconnected from WebSocket server');
+    // Handle connection errors
+    socketRef.current.on('connect_error', (error) => {
+      console.log('Connection error:', error);
+      setConnectionState('error');
+    });
+
+    // Handle disconnections
+    socketRef.current.on('disconnect', (reason) => {
+      console.log('Disconnected from server:', reason);
       setConnectionState('disconnected');
     });
 
+    // Cleanup function when component unmounts
     return () => {
-      socketRef.current?.close();
+      console.log('Cleaning up socket connection');
+      socketRef.current?.disconnect();
+      socketRef.current = null;
     };
   }, []);
 
